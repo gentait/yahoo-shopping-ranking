@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Link, Switch } from "react-router-dom";
+import Ranking from "./containers/Ranking";
+import Nav from "./containers/Nav";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      {/* 総合ランキングのルート */}
+      <Switch>
+        <Route path="/all" component={Ranking} />
+        <Route
+          path="/category/:id"
+          render={({ match }) => <Ranking categoryId={match.params.id} />}
+        />
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
