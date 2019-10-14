@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
-import { isTSEnumMember } from "@babel/types";
-
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 interface Props {
   categoryId?: string;
   category: any;
@@ -31,13 +35,27 @@ const Ranking: React.FC<Props> = ({
         } else {
           return (
             <ol>
-              {ranking.map((item: any) => (
-                <li key={`ranking-item-${item.code}`}>
-                  <img alt={isTSEnumMember.name} src={item.imageUrl} />
-                  <a href={item.url} target="_blank">
-                    {item.name}
-                  </a>
-                </li>
+              {ranking.map((item: any, i: number) => (
+                <Card
+                  key={`ranking-item-${item.code}`}
+                  style={{ maxWidth: "500px", margin: "32px auto" }}
+                >
+                  <CardMedia
+                    image={item.imageUrl}
+                    title={`${i + 1}位　${item.name}`}
+                    style={{ height: "200px" }}
+                  />
+                  <CardContent>
+                    <Typography variant="h6">
+                      {`${i + 1}位　${item.name}`}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button color="secondary" fullWidth href={item.url}>
+                      商品ページへ
+                    </Button>
+                  </CardActions>
+                </Card>
               ))}
             </ol>
           );
