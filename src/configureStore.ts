@@ -1,4 +1,4 @@
-import { createBrowserHistory } from "history";
+import { createHashHistory } from "history";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
@@ -6,7 +6,7 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 
 import * as reducers from "./reducers";
 
-export const history = createBrowserHistory();
+export const history = createHashHistory();
 
 export default function configureStore() {
   const store = createStore(
